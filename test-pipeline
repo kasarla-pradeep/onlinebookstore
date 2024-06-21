@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('git clone ') {
+            steps {
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/kasarla-pradeep/onlinebookstore.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('deply of tomcat') {
+            steps {
+                deploy adapters: [tomcat9(credentialsId: '093618c7-3db2-4485-8562-57a32e5b6955', path: '', url: 'http://13.51.237.172:8080')], contextPath: 'pradeep', war: '**/*.war'
+                
+            }
+        }
+    }
+}
