@@ -14,7 +14,7 @@ pipeline {
         }
         stage('DEPLOY-TEST') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: '093618c7-3db2-4485-8562-57a32e5b6955', path: '', url: 'http://51.21.150.92:8080')], contextPath: 'PRADEEP_ONLINEBOOKSTORE', war: '**/*.war'
+                deploy adapters: [tomcat9(credentialsId: '093618c7-3db2-4485-8562-57a32e5b6955', path: '', url: 'http://51.21.150.92:8080')], contextPath: 'KASARLA_ONLINEBOOKSTORE', war: '**/*.war'
             }
         }
     }
