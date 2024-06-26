@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('GIT-TEST') {
+            steps {
+                git branch: 'main', url: 'https://github.com/kasarla-pradeep/onlinebookstore.git'
+            }
+        }
+        stage('MANEN-TEST') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('DEPLOY-TEST') {
+            steps {
+                deploy adapters: [tomcat9(credentialsId: '093618c7-3db2-4485-8562-57a32e5b6955', path: '', url: 'http://51.21.150.92:8080')], contextPath: 'PRADEEP_ONLINEBOOKSTORE', war: '**/*.war'
+            }
+        }
+    }
+}
